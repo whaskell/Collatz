@@ -1,13 +1,13 @@
-FILES :=                              \
-    .travis.yml                       \
-    Collatz.c++                       \
-    Collatz.h                         \
-    Collatz.log                       \
-    html                              \
-    RunCollatz.c++                    \
-    RunCollatz.in                     \
-    RunCollatz.out                    \
-    TestCollatz.c++                   \
+FILES :=            \
+    .travis.yml     \
+    Collatz.c++     \
+    Collatz.h       \
+    Collatz.log     \
+    html            \
+    RunCollatz.c++  \
+    RunCollatz.in   \
+    RunCollatz.out  \
+    TestCollatz.c++ \
     TestCollatz.out
 
 CXX        := g++-4.8

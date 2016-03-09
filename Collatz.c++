@@ -10,9 +10,6 @@
 
 #include <cassert>  // assert
 #include <iostream> // endl, istream, ostream
-#include <sstream>  // istringstream
-#include <string>   // getline, string
-#include <utility>  // make_pair, pair
 
 #include "Collatz.h"
 
@@ -22,12 +19,11 @@ using namespace std;
 // collatz_read
 // ------------
 
-pair<int, int> collatz_read (const string& s) {
-    istringstream sin(s);
-    int i;
-    int j;
-    sin >> i >> j;
-    return make_pair(i, j);}
+bool collatz_read (istream& r, int& i, int& j) {
+    if (!(r >> i))
+        return false;
+    r >> j;
+    return true;}
 
 // ------------
 // collatz_eval
@@ -49,10 +45,8 @@ void collatz_print (ostream& w, int i, int j, int v) {
 // -------------
 
 void collatz_solve (istream& r, ostream& w) {
-    string s;
-    while (getline(r, s)) {
-        const pair<int, int> p = collatz_read(s);
-        const int            i = p.first;
-        const int            j = p.second;
-        const int            v = collatz_eval(i, j);
+    int i;
+    int j;
+    while (collatz_read(r, i, j)) {
+        const int v = collatz_eval(i, j);
         collatz_print(w, i, j, v);}}

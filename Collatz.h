@@ -22,11 +22,13 @@ using namespace std;
 // ------------
 
 /**
- * read two ints
- * @param s a string
- * @return a pair of ints, representing the beginning and end of a range, [i, j]
+ * read two ints from r into i an j
+ * @param r an istream
+ * @param i an int
+ * @param j an int
+ * @return true if the read is successful, otherwise false
  */
-pair<int, int> collatz_read (const string& s);
+bool collatz_read (istream& r, int& i, int& j);
 
 // ------------
 // collatz_eval
@@ -35,7 +37,7 @@ pair<int, int> collatz_read (const string& s);
 /**
  * @param i the beginning of the range, inclusive
  * @param j the end       of the range, inclusive
- * @return the max cycle length of the range [i, j]
+ * @return the max cycle length of the range [i, j)
  */
 int collatz_eval (int i, int j);
 
@@ -44,7 +46,7 @@ int collatz_eval (int i, int j);
 // -------------
 
 /**
- * print three ints
+ * print three ints to w
  * @param w an ostream
  * @param i the beginning of the range, inclusive
  * @param j the end       of the range, inclusive

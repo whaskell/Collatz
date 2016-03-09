@@ -30,10 +30,13 @@ using namespace std;
 // ----
 
 TEST(CollatzFixture, read) {
-    string s("1 10\n");
-    const pair<int, int> p = collatz_read(s);
-    ASSERT_EQ( 1, p.first);
-    ASSERT_EQ(10, p.second);}
+    istringstream r("1 10\n");
+    int           i;
+    int           j;
+    const bool b = collatz_read(r, i, j);
+    ASSERT_TRUE(b);
+    ASSERT_EQ( 1, i);
+    ASSERT_EQ(10, j);}
 
 // ----
 // eval
