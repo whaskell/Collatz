@@ -16,6 +16,7 @@ LDFLAGS    := -lgtest -lgtest_main -pthread
 GCOV       := gcov-4.8
 GCOVFLAGS  := -fprofile-arcs -ftest-coverage
 VALGRIND   := valgrind
+DEBUG      := -g
 
 html: Doxyfile Collatz.h Collatz.c++ RunCollatz.c++ TestCollatz.c++
 	doxygen Doxyfile
@@ -27,7 +28,7 @@ Doxyfile:
 	doxygen -g
 
 RunCollatz: Collatz.h Collatz.c++ RunCollatz.c++
-	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ -o RunCollatz
+	$(CXX) $(DEBUG) $(CXXFLAGS) $(GCOVFLAGS) Collatz.c++ RunCollatz.c++ -o RunCollatz
 
 RunCollatz.tmp: RunCollatz
 	./RunCollatz < RunCollatz.in > RunCollatz.tmp
