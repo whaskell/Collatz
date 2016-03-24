@@ -43,7 +43,7 @@ script:
     - ls -al
     - make Collatz.log
     - ls -al
-    - make test
+    - make TestCollatz
     - ls -al
     - make check
 
