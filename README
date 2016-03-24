@@ -1,0 +1,5 @@
+Collatz
+
+The 3n+1 problem
+
+Only using a static cache approach. Maybe something better later.

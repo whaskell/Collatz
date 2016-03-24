@@ -60,7 +60,7 @@ void init_cache(int i, int j, int step, int cache[])
 // collatz_eval
 // ------------
 
-#define HARD_CACHE_SIZE 2000
+#define HARD_CACHE_SIZE 60000
 
 int hard_cache[HARD_CACHE_SIZE + 1];
 
