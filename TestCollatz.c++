@@ -25,6 +25,7 @@ using namespace std;
 // TestCollatz
 // -----------
 
+
 // ----
 // read
 // ----
@@ -43,23 +44,28 @@ TEST(CollatzFixture, read) {
 // ----
 
 TEST(CollatzFixture, eval_1) {
-    const int v = collatz_eval(1, 10);
+	init_hard_cache(1);
+	const int v = collatz_eval(1, 10);
     ASSERT_EQ(20, v);}
 
 TEST(CollatzFixture, eval_2) {
-    const int v = collatz_eval(100, 200);
+	init_hard_cache(1);
+	const int v = collatz_eval(100, 200);
     ASSERT_EQ(125, v);}
 
 TEST(CollatzFixture, eval_3) {
-    const int v = collatz_eval(201, 210);
+	init_hard_cache(1);
+	const int v = collatz_eval(201, 210);
     ASSERT_EQ(89, v);}
 
 TEST(CollatzFixture, eval_4) {
-    const int v = collatz_eval(900, 1000);
+	init_hard_cache(1);
+	const int v = collatz_eval(900, 1000);
     ASSERT_EQ(174, v);}
 
 TEST(CollatzFixture, eval_5) {
-    const int v = collatz_eval(10, 1);
+	init_hard_cache(1);
+	const int v = collatz_eval(10, 1);
     ASSERT_EQ(20, v);}
 
 // -----
@@ -76,10 +82,11 @@ TEST(CollatzFixture, print) {
 // -----
 
 TEST(CollatzFixture, solve) {
-    istringstream r("1 10\n100 200\n201 210\n900 1000\n");
+    istringstream r("1 10\n100 200\n100 200\n201 210\n300 400\n500 600\n700 800\n900 1000\n");
     ostringstream w;
-    collatz_solve(r, w);
-    ASSERT_EQ("1 10 20\n100 200 125\n201 210 89\n900 1000 174\n", w.str());}
+	init_hard_cache(1);
+	collatz_solve(r, w);
+    ASSERT_EQ("1 10 20\n100 200 125\n100 200 125\n201 210 89\n300 400 144\n500 600 137\n700 800 171\n900 1000 174\n", w.str());}
 
 /*
 % g++-4.8 -pedantic -std=c++11 -Wall -fprofile-arcs -ftest-coverage Collatz.c++ TestCollatz.c++ -o TestCollatz -lgtest -lgtest_main -pthread

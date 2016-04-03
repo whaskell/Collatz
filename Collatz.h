@@ -64,4 +64,6 @@ void collatz_print (ostream& w, int i, int j, int v);
  */
 void collatz_solve (istream& r, ostream& w);
 
+void init_hard_cache(int i);
+
 #endif // Collatz_h

@@ -18,6 +18,7 @@
 
 int main () {
     using namespace std;
+   	init_hard_cache(1);
     collatz_solve(cin, cout);
     return 0;}
 

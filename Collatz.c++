@@ -10,10 +10,19 @@
 
 #include <cassert>  // assert
 #include <iostream> // endl, istream, ostream
+#include <list>
 
 #include "Collatz.h"
 
 using namespace std;
+
+//#define HARD_CACHE_SIZE 60000
+#define HARD_CACHE_SIZE 60
+// 60,000 seems to be the fastest w/o out anyother caching
+
+
+int hard_cache[HARD_CACHE_SIZE + 1];
+
 
 // ------------
 // collatz_read
@@ -25,23 +34,29 @@ bool collatz_read (istream& r, int& i, int& j) {
     r >> j;
     return true;}
 
-
 // ------------
 // init cache
 // ------------
 
 // cache[0] = throw away value
 
-void init_cache(int i, int j, int step, int cache[])
+void init_hard_cache(int i)
 {
 	int cycle_cnt, n;
 
-	for (int x=i; x<=j; x+=step)
+	for (int x = i; x <= HARD_CACHE_SIZE; ++x)
 	{
 		n = x;
 		cycle_cnt = 1;
 		while(n != 1)
 		{
+#if 0
+			if (n < x)
+			{
+				cycle_cnt += cache[n] - 1;
+				break;
+			}
+#endif
 			++cycle_cnt;
 			if(n & 1)	// Test if odd number
 			{
@@ -52,7 +67,7 @@ void init_cache(int i, int j, int step, int cache[])
 				n >>= 1 ; // n = n/2
 			}
 		}
-		cache[x] = cycle_cnt;
+		hard_cache[x] = cycle_cnt;
 	}
 }
 
@@ -60,9 +75,6 @@ void init_cache(int i, int j, int step, int cache[])
 // collatz_eval
 // ------------
 
-#define HARD_CACHE_SIZE 60000
-
-int hard_cache[HARD_CACHE_SIZE + 1];
 
 int collatz_eval (int i, int j) {
 
@@ -77,7 +89,7 @@ int collatz_eval (int i, int j) {
 		i = i - j;
 	}
 
-	for (int x=i; x<=j; ++x)
+	for (int x = i; x <= j; ++x)
 	{
 		n = x;
 		cycle_cnt = 1;
@@ -105,6 +117,7 @@ int collatz_eval (int i, int j) {
 		if (cycle_cnt > cycle_cnt_max)
 			cycle_cnt_max = cycle_cnt;
 	}
+
     return cycle_cnt_max;}
 
 // -------------
@@ -121,7 +134,8 @@ void collatz_print (ostream& w, int i, int j, int v) {
 void collatz_solve (istream& r, ostream& w) {
     int i;
     int j;
-	init_cache(1, HARD_CACHE_SIZE, 1, hard_cache);
+
     while (collatz_read(r, i, j)) {
         const int v = collatz_eval(i, j);
-        collatz_print(w, i, j, v);}}
+        collatz_print(w, i, j, v);}
+}
