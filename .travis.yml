@@ -45,6 +45,8 @@ script:
     - ls -al
     - make TestCollatz
     - ls -al
+    - make TestCollatz.tmp
+    - ls -al
     - make check
 
 after_failure:
